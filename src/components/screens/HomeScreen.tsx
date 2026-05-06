@@ -1,5 +1,6 @@
 import { FEATURED_QUICK_RESET_ID, getMeditation } from '../../data/meditations'
 import { HeroSection } from '../HeroSection'
+import { HeartIcon } from '../icons'
 import { QuickResetCard } from '../QuickResetCard'
 
 interface HomeScreenProps {
@@ -32,13 +33,25 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
         </button>
       </section>
 
-      <p className="max-w-[44ch] mx-auto text-center text-[12.5px] text-charcoal-700/65 leading-loose">
-        You won't always have time for a full practice.
-        <br />
-        After one moment, before the next,
-        <br />
-        there is always room for a breath.
-      </p>
+      <div className="text-center">
+        <p className="max-w-[44ch] mx-auto text-[12.5px] text-charcoal-700/65 leading-loose">
+          You won't always have time for a full practice.
+          <br />
+          After one moment, before the next,
+          <br />
+          there is always room for a breath.
+        </p>
+        <a
+          href="https://buymeacoffee.com/momentsmeditation"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-[12px] text-sage-500
+                     hover:text-forest-700 transition active:scale-[0.97]"
+        >
+          <HeartIcon className="h-3.5 w-3.5" />
+          <span>Support Moments</span>
+        </a>
+      </div>
     </div>
   )
 }

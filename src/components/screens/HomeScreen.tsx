@@ -32,7 +32,7 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
         </button>
       </section>
 
-      <p className="max-w-[34ch] mx-auto text-center text-[13.5px] text-charcoal-700/65 leading-loose">
+      <p className="max-w-[44ch] mx-auto text-center text-[12.5px] text-charcoal-700/65 leading-loose">
         You won't always have time for a full practice.
         <br />
         After one moment, before the next,

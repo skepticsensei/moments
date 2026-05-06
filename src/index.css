@@ -74,6 +74,11 @@
   }
 
   .phone-frame {
+    /* Pin to a fixed 440px on desktop. width:100% + max-width alone
+       wasn't enough: #root is a flex item that sizes to content, so on
+       tabs with narrow content (e.g. Saved/Recent empty states) the
+       whole frame collapsed inward. */
+    width: 440px;
     max-width: 440px;
     height: min(900px, calc(100vh - 64px));
     border-radius: 36px;

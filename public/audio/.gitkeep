@@ -1,0 +1,3 @@
+# Place real audio files here.
+# File names should match the `audioSrc` in src/data/meditations.ts.
+# Example: /audio/before-the-day-begins.mp3

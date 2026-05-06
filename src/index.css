@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior: none;
+  }
+
+  body {
+    @apply bg-cream-100 text-charcoal-800 font-sans;
+    margin: 0;
+  }
+
+  h1, h2, h3 {
+    @apply font-serif text-forest-700;
+    letter-spacing: -0.01em;
+  }
+
+  *:focus-visible {
+    @apply outline-none ring-2 ring-forest-500 ring-offset-2 ring-offset-cream-100 rounded;
+  }
+
+  ::selection {
+    background: rgba(63, 92, 73, 0.18);
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* The phone shell — full-bleed on mobile, framed on desktop */
+.phone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  background:
+    radial-gradient(900px 500px at 80% -10%, rgba(168, 184, 154, 0.18), transparent 60%),
+    radial-gradient(700px 400px at -10% 110%, rgba(166, 130, 106, 0.10), transparent 60%),
+    #F5EFE3;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  body {
+    background:
+      radial-gradient(1200px 700px at 80% -10%, rgba(168, 184, 154, 0.22), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(166, 130, 106, 0.14), transparent 60%),
+      #EDE4D2;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+
+  #root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .phone-frame {
+    max-width: 440px;
+    height: min(900px, calc(100vh - 64px));
+    border-radius: 36px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.6) inset,
+      0 30px 60px -20px rgba(36, 53, 40, 0.25),
+      0 8px 24px rgba(36, 53, 40, 0.10);
+    border: 1px solid rgba(36, 53, 40, 0.08);
+  }
+}
+
+@layer components {
+  .surface {
+    @apply bg-cream-50/80 backdrop-blur-sm border border-cream-200 rounded-2xl shadow-soft;
+  }
+
+  .surface-raised {
+    @apply bg-cream-50 border border-cream-200 rounded-2xl shadow-glow;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-medium
+           transition duration-300 ease-out select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-forest-600 text-cream-50 hover:bg-forest-700 active:scale-[0.98]
+           shadow-soft;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-forest-700 hover:bg-cream-200/70 active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn border border-forest-600/30 text-forest-700 hover:bg-cream-50
+           hover:border-forest-600/50 active:scale-[0.98];
+  }
+
+  .label-tiny {
+    @apply text-[11px] uppercase tracking-[0.18em] text-sage-500 font-medium;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs
+           bg-cream-200 text-forest-700;
+  }
+
+  .top-bar {
+    @apply relative flex items-center justify-between gap-3 px-5
+           h-14 shrink-0 bg-cream-100/80 backdrop-blur-md
+           border-b border-cream-200/60 z-30;
+    padding-top: max(env(safe-area-inset-top), 0px);
+    height: calc(56px + max(env(safe-area-inset-top), 0px));
+  }
+
+  .tab-bar {
+    @apply relative flex items-stretch shrink-0 bg-cream-50/95 backdrop-blur-md
+           border-t border-cream-200/80 z-30;
+    padding-bottom: max(env(safe-area-inset-bottom), 0px);
+  }
+
+  .tab-button {
+    @apply flex-1 flex flex-col items-center justify-center gap-1 py-2.5
+           text-charcoal-700/55 transition active:scale-[0.96];
+    min-height: 56px;
+  }
+
+  .tab-button[aria-selected="true"] {
+    @apply text-forest-700;
+  }
+
+  .screen {
+    @apply flex-1 overflow-y-auto overflow-x-hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(36, 53, 40, 0.18) transparent;
+  }
+
+  .screen::-webkit-scrollbar {
+    width: 6px;
+  }
+  .screen::-webkit-scrollbar-thumb {
+    background: rgba(36, 53, 40, 0.16);
+    border-radius: 999px;
+  }
+
+  .screen-padding {
+    @apply px-5 pt-5 pb-8;
+  }
+
+  .meditation-row {
+    @apply w-full text-left flex items-center gap-3 px-4 py-3.5
+           bg-cream-50 border border-cream-200 rounded-2xl
+           transition duration-200 active:scale-[0.985] active:bg-cream-100;
+  }
+}
+
+@layer utilities {
+  /* Range slider */
+  .meditation-progress {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(
+      to right,
+      var(--accent, #3F5C49) 0%,
+      var(--accent, #3F5C49) var(--progress, 0%),
+      rgba(36, 53, 40, 0.12) var(--progress, 0%),
+      rgba(36, 53, 40, 0.12) 100%
+    );
+    outline: none;
+    cursor: pointer;
+  }
+
+  .meditation-progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #FBF7F0;
+    border: 2px solid var(--accent, #3F5C49);
+    box-shadow: 0 1px 3px rgba(36, 53, 40, 0.18);
+    transition: transform 200ms ease;
+  }
+  .meditation-progress::-webkit-slider-thumb:hover {
+    transform: scale(1.12);
+  }
+  .meditation-progress::-moz-range-thumb {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #FBF7F0;
+    border: 2px solid var(--accent, #3F5C49);
+    box-shadow: 0 1px 3px rgba(36, 53, 40, 0.18);
+    cursor: pointer;
+  }
+
+  .h-4\.5 { height: 1.125rem; }
+  .w-4\.5 { width: 1.125rem; }
+  .h-5\.5 { height: 1.375rem; }
+  .w-5\.5 { width: 1.375rem; }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Slide-in from right (push navigation) */
+  .anim-push {
+    animation: slideFromRight 320ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  @keyframes slideFromRight {
+    from { transform: translateX(24px); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+  }
+
+  /* Modal slide up from bottom */
+  .anim-modal {
+    animation: slideFromBottom 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  @keyframes slideFromBottom {
+    from { transform: translateY(28px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .anim-fade {
+    animation: fade 240ms ease-out both;
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+}

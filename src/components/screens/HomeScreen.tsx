@@ -15,7 +15,7 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
     <div className="screen-padding anim-fade flex flex-col min-h-full justify-between gap-10">
       <HeroSection />
 
-      <section>
+      <section className="mt-10">
         <button
           onClick={onOpenMoments}
           className="btn-primary w-full relative"

@@ -10,7 +10,7 @@ import {
 } from './icons'
 
 const MUSIC_VOLUME = 0.35
-const FADE_IN_S = 6
+const FADE_IN_S = 3
 const FADE_OUT_S = 5
 // exponentialRampToValueAtTime can't ramp to/from 0; use a near-silent floor.
 const SILENCE = 0.0001

@@ -1,6 +1,6 @@
 import { FEATURED_QUICK_RESET_ID, getMeditation } from '../../data/meditations'
 import { HeroSection } from '../HeroSection'
-import { HeartIcon } from '../icons'
+import { ChevronRightIcon, HeartIcon } from '../icons'
 import { QuickResetCard } from '../QuickResetCard'
 
 interface HomeScreenProps {
@@ -27,9 +27,13 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
         )}
         <button
           onClick={onOpenMoments}
-          className="btn-primary w-full mt-8"
+          className="btn-primary w-full mt-8 relative"
         >
-          What moment are you in?
+          <span>What moment are you in?</span>
+          <ChevronRightIcon
+            className="h-4 w-4 absolute right-5 top-1/2 -translate-y-1/2 opacity-80"
+            aria-hidden
+          />
         </button>
       </section>
 

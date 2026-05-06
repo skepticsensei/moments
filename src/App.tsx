@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { BottomTabBar, type TabId } from './components/BottomTabBar'
 import { CategoryView } from './components/CategoryView'
+import { InstallPrompt } from './components/InstallPrompt'
 import { MeditationPlayer } from './components/MeditationPlayer'
 import { TopBar } from './components/TopBar'
 import { BrowseScreen } from './components/screens/BrowseScreen'
@@ -147,6 +148,8 @@ export default function App() {
       </div>
 
       <BottomTabBar active={tab} onChange={switchTab} />
+
+      {!openMed && <InstallPrompt />}
 
       {openMed && (
         <MeditationPlayer

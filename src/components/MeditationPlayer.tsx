@@ -475,11 +475,6 @@ export function MeditationPlayer({
             </div>
           </div>
 
-          {audioAvailable === false && (
-            <p className="mt-4 text-[11.5px] text-charcoal-700/55 text-center max-w-[30ch]">
-              Audio coming soon — the timer is running so you can practice with your own breath.
-            </p>
-          )}
         </div>
 
         {/* Transcript */}

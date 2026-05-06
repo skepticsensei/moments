@@ -147,14 +147,15 @@
   }
 
   .screen {
-    @apply flex-1 overflow-y-auto overflow-x-hidden;
+    @apply flex-1 overflow-y-scroll overflow-x-hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     scrollbar-color: rgba(36, 53, 40, 0.18) transparent;
-    /* Reserve scrollbar space on every screen so content width stays
-       identical whether the tab scrolls (Browse/Saved/Recent) or fits
-       in one screen (Home). Without this, scroll-prone tabs render
-       ~6px narrower than non-scrolling ones. */
+    /* overflow-y: scroll (not auto) keeps the scrollbar lane reserved
+       on every tab regardless of whether the content overflows. This
+       guarantees identical content width across Home / Browse /
+       Saved / Recent, even on browsers where scrollbar-gutter behaves
+       inconsistently when content fits. */
     scrollbar-gutter: stable;
   }
 

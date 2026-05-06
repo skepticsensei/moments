@@ -32,18 +32,13 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
         </button>
       </section>
 
-      <div className="max-w-[34ch] mx-auto text-center">
-        <p className="text-[13.5px] text-charcoal-700/65 leading-loose">
-          You won't always have time for a full practice.
-          <br />
-          After one moment, before the next,
-          <br />
-          there is always room for a breath.
-        </p>
-        <p className="mt-4 font-serif italic text-[13.5px] text-forest-700/70 leading-relaxed">
-          Brief meditations for the small spaces of the day.
-        </p>
-      </div>
+      <p className="max-w-[34ch] mx-auto text-center text-[13.5px] text-charcoal-700/65 leading-loose">
+        You won't always have time for a full practice.
+        <br />
+        After one moment, before the next,
+        <br />
+        there is always room for a breath.
+      </p>
     </div>
   )
 }

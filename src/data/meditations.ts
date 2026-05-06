@@ -22,7 +22,7 @@ export interface Meditation {
   durationSeconds: number
   description: string
   moment: string
-  audioSrc: string
+  audioSrc?: string
   transcript?: string
   reflection?: string
 }
@@ -89,7 +89,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short grounding meditation for the space between waking and beginning.',
     moment: 'Before stepping into the day',
-    audioSrc: '/audio/before-the-day-begins.mp3',
     transcript:
       'Before you reach for anything, return to yourself. Feel the weight of your body. Take one slow breath, then another. The day has not begun yet — you have. Set a small intention. Carry it gently into what comes next.',
     reflection: 'What are you carrying forward into today?',
@@ -103,7 +102,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A small pause before the day rushes in through a screen.',
     moment: 'Before reaching for the phone',
-    audioSrc: '/audio/before-checking-your-phone.mp3',
     transcript:
       'Before the noise begins, take one full breath here. Your attention is yours first. Let this minute belong to you. When you pick up the phone, do it on purpose.',
   },
@@ -116,7 +114,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Settle into focus before the first task pulls you in.',
     moment: 'Before opening the laptop',
-    audioSrc: '/audio/before-work.mp3',
     transcript:
       'Sit with both feet on the floor. Soften the jaw. Lower the shoulders. Let your breath find its own slow rhythm. What is the one thing that matters most today?',
   },
@@ -129,7 +126,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short arrival before practice, training, or movement.',
     moment: 'Before the session begins',
-    audioSrc: '/audio/before-training.mp3',
   },
 
   // ---------- Reset ----------
@@ -142,7 +138,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A quick reset between calls, conversations, or shifts in focus.',
     moment: 'In the gap between two meetings',
-    audioSrc: '/audio/between-meetings.mp3',
     transcript:
       'Close the last conversation gently. Stand if you can. One breath in, one long breath out. Soften the face. The next meeting has not started yet. You are here.',
   },
@@ -155,7 +150,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'When something hard has just happened and you need to settle.',
     moment: 'Right after something difficult',
-    audioSrc: '/audio/after-a-difficult-moment.mp3',
     reflection: 'What part of you needs care right now?',
   },
   {
@@ -167,7 +161,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Three breaths to find ground before you reply.',
     moment: 'Before sending the message or speaking',
-    audioSrc: '/audio/before-responding.mp3',
     transcript:
       'Pause before you answer. Feel your feet. Let the first breath soften the body. Let the second breath create space. Let the third breath remind you that you can respond without being pulled away from yourself.',
   },
@@ -180,7 +173,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A gentle return when everything feels like too much.',
     moment: 'When the day has become too full',
-    audioSrc: '/audio/when-you-feel-overwhelmed.mp3',
   },
 
   // ---------- Return ----------
@@ -193,7 +185,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short grounding through the soles of the feet.',
     moment: 'Whenever you feel scattered',
-    audioSrc: '/audio/feel-your-feet.mp3',
     transcript:
       'Bring your attention to the soles of your feet. Feel the floor meeting you. Notice weight, contact, warmth. You do not need to go anywhere. You are already here.',
   },
@@ -206,7 +197,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'The shortest possible return — just three breaths.',
     moment: 'Anywhere, anytime',
-    audioSrc: '/audio/three-breaths-to-center.mp3',
     transcript:
       'One breath to arrive. One breath to soften. One breath to begin again.',
   },
@@ -219,7 +209,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Find your seat, your spine, and your breath.',
     moment: 'When you need to come back to yourself',
-    audioSrc: '/audio/grounding-through-posture.mp3',
   },
   {
     id: 'waiting-without-worrying',
@@ -230,7 +219,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'For the in-between moments of waiting — a line, a queue, a pause.',
     moment: 'While waiting',
-    audioSrc: '/audio/waiting-without-worrying.mp3',
   },
 
   // ---------- Transition ----------
@@ -243,7 +231,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Leave work where it belongs before you walk through the door.',
     moment: 'On the way home',
-    audioSrc: '/audio/after-work-before-home.mp3',
     transcript:
       'You are between roles now. Let work remain where it belongs. Feel your hands, your shoulders, your breath. Before you enter the next space, return to yourself.',
     reflection: 'What can you leave behind before you walk in?',
@@ -257,7 +244,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Arrive present before someone arrives in front of you.',
     moment: 'Before a conversation that matters',
-    audioSrc: '/audio/before-a-conversation.mp3',
   },
   {
     id: 'leaving-one-thing-behind',
@@ -268,7 +254,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Set down something you have been carrying so the next moment can be clear.',
     moment: 'Between one task and the next',
-    audioSrc: '/audio/leaving-one-thing-behind.mp3',
     reflection: 'What are you ready to set down?',
   },
   {
@@ -280,7 +265,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A small ritual for moving from one space into another.',
     moment: 'At a doorway, real or symbolic',
-    audioSrc: '/audio/crossing-the-threshold.mp3',
   },
 
   // ---------- Practice ----------
@@ -293,7 +277,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A grounded arrival before training, yoga, or practice.',
     moment: 'Before practice begins',
-    audioSrc: '/audio/before-stepping-onto-the-mat.mp3',
     transcript:
       'Stand tall without becoming rigid. Let your breath settle into your center. Step onto the mat with respect, attention, and a willingness to learn.',
   },
@@ -306,7 +289,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Slow down the body and let the breath catch up.',
     moment: 'After a workout or training session',
-    audioSrc: '/audio/after-training.mp3',
     reflection: 'What did the body teach you today?',
   },
   {
@@ -318,7 +300,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Quiet standing meditation — rooted, soft, awake.',
     moment: 'When you have a few minutes to stand',
-    audioSrc: '/audio/standing-stillness.mp3',
   },
   {
     id: 'yi-jin-jing-inspired-reset',
@@ -329,7 +310,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short reset inspired by classical tendon-changing principles — breath, posture, intention.',
     moment: 'Mid-day, when the body feels stiff',
-    audioSrc: '/audio/yi-jin-jing-inspired-reset.mp3',
   },
 
   // ---------- Rest ----------
@@ -342,7 +322,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A soft release of everything the day asked of you.',
     moment: 'In the evening',
-    audioSrc: '/audio/letting-the-day-go.mp3',
     reflection: 'What was today, in one quiet sentence?',
   },
   {
@@ -354,7 +333,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Slow breath and body softening to ease into sleep.',
     moment: 'In bed, before closing your eyes',
-    audioSrc: '/audio/before-sleep.mp3',
   },
   {
     id: 'releasing-the-shoulders',
@@ -365,7 +343,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Let go of the day held in the upper back, neck, and jaw.',
     moment: 'After a long day',
-    audioSrc: '/audio/releasing-the-shoulders.mp3',
   },
   {
     id: 'gratitude-before-rest',
@@ -376,7 +353,6 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short, honest gratitude practice — without performance.',
     moment: 'Before sleep',
-    audioSrc: '/audio/gratitude-before-rest.mp3',
     reflection: 'Name one small thing that held you today.',
   },
 ]

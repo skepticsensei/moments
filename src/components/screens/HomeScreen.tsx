@@ -26,8 +26,17 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
             aria-hidden
           />
         </button>
+
+        <p className="mt-7 max-w-[44ch] mx-auto text-center text-[12.5px] text-charcoal-700/65 leading-loose">
+          You won't always have time for a full practice.
+          <br />
+          After one moment, before the next,
+          <br />
+          there is always room for a breath.
+        </p>
+
         {featured && (
-          <div className="mt-8">
+          <div className="mt-7">
             <p className="label-tiny mb-3">Quick Reset</p>
             <QuickResetCard
               meditation={featured}
@@ -36,14 +45,6 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
           </div>
         )}
       </section>
-
-      <p className="max-w-[44ch] mx-auto text-center text-[12.5px] text-charcoal-700/65 leading-loose">
-        You won't always have time for a full practice.
-        <br />
-        After one moment, before the next,
-        <br />
-        there is always room for a breath.
-      </p>
 
       <a
         href="https://buymeacoffee.com/momentsmeditation"

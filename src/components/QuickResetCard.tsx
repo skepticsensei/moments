@@ -34,7 +34,7 @@ export function QuickResetCard({ meditation, onStart }: QuickResetCardProps) {
           <h3 className="font-serif text-lg text-forest-700 leading-snug truncate">
             {meditation.title}
           </h3>
-          <p className="mt-0.5 text-[12.5px] text-charcoal-700/70 line-clamp-1">
+          <p className="mt-0.5 text-[12.5px] text-charcoal-700/70 leading-snug">
             {meditation.description}
           </p>
         </div>

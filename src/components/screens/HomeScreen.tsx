@@ -16,18 +16,9 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
       <HeroSection />
 
       <section>
-        {featured && (
-          <>
-            <p className="label-tiny mb-3">Quick Reset</p>
-            <QuickResetCard
-              meditation={featured}
-              onStart={() => onSelectMeditation(featured.id)}
-            />
-          </>
-        )}
         <button
           onClick={onOpenMoments}
-          className="btn-primary w-full mt-8 relative"
+          className="btn-primary w-full relative"
         >
           <span>What moment are you in?</span>
           <ChevronRightIcon
@@ -35,6 +26,15 @@ export function HomeScreen({ onSelectMeditation, onOpenMoments }: HomeScreenProp
             aria-hidden
           />
         </button>
+        {featured && (
+          <div className="mt-8">
+            <p className="label-tiny mb-3">Quick Reset</p>
+            <QuickResetCard
+              meditation={featured}
+              onStart={() => onSelectMeditation(featured.id)}
+            />
+          </div>
+        )}
       </section>
 
       <p className="max-w-[44ch] mx-auto text-center text-[12.5px] text-charcoal-700/65 leading-loose">

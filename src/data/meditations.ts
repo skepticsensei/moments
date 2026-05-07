@@ -92,6 +92,7 @@ export const MEDITATIONS: Meditation[] = [
     transcript:
       'Before you reach for anything, return to yourself. Feel the weight of your body. Take one slow breath, then another. The day has not begun yet. You have. Set a small intention. Carry it gently into what comes next.',
     reflection: 'What are you carrying forward into today?',
+    audioSrc: '/audio/before-the-day-begins.mp3',
   },
   {
     id: 'before-checking-your-phone',
@@ -104,6 +105,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'Before reaching for the phone',
     transcript:
       'Before the noise begins, take one full breath here. Your attention is yours first. Let this minute belong to you. When you pick up the phone, do it on purpose.',
+    audioSrc: '/audio/before-checking-your-phone.mp3',
   },
   {
     id: 'before-work',
@@ -116,6 +118,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'Before opening the laptop',
     transcript:
       'Sit with both feet on the floor. Soften the jaw. Lower the shoulders. Let your breath find its own slow rhythm. What is the one thing that matters most today?',
+    audioSrc: '/audio/before-work.mp3',
   },
   {
     id: 'before-training',
@@ -126,6 +129,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short arrival before practice, training, or movement.',
     moment: 'Before the session begins',
+    audioSrc: '/audio/before-training.mp3',
   },
 
   // ---------- Reset ----------

@@ -33,7 +33,7 @@ export const CATEGORIES: Category[] = [
     name: 'Begin',
     description: 'For the space between waking and the day.',
     longDescription:
-      'Meditations for the first quiet edges of the morning — before the day takes you with it.',
+      'Meditations for the first quiet edges of the morning, before the day takes you with it.',
     accent: '#7A8B6F',
   },
   {
@@ -57,7 +57,7 @@ export const CATEGORIES: Category[] = [
     name: 'Transition',
     description: 'For moving from one role or place into another.',
     longDescription:
-      'For the thresholds — between work and home, conversation and silence.',
+      'For the thresholds between work and home, conversation and silence.',
     accent: '#8B6A53',
   },
   {
@@ -73,7 +73,7 @@ export const CATEGORIES: Category[] = [
     name: 'Rest',
     description: 'For the space between the day and sleep.',
     longDescription:
-      'Soft endings — for letting the day go and entering rest gently.',
+      'Soft endings, for letting the day go and entering rest gently.',
     accent: '#A68B5B',
   },
 ]
@@ -90,7 +90,7 @@ export const MEDITATIONS: Meditation[] = [
       'A short grounding meditation for the space between waking and beginning.',
     moment: 'Before stepping into the day',
     transcript:
-      'Before you reach for anything, return to yourself. Feel the weight of your body. Take one slow breath, then another. The day has not begun yet — you have. Set a small intention. Carry it gently into what comes next.',
+      'Before you reach for anything, return to yourself. Feel the weight of your body. Take one slow breath, then another. The day has not begun yet. You have. Set a small intention. Carry it gently into what comes next.',
     reflection: 'What are you carrying forward into today?',
   },
   {
@@ -195,7 +195,7 @@ export const MEDITATIONS: Meditation[] = [
     duration: '1 min',
     durationSeconds: 60,
     description:
-      'The shortest possible return — just three breaths.',
+      'The shortest possible return. Just three breaths.',
     moment: 'Anywhere, anytime',
     transcript:
       'One breath to arrive. One breath to soften. One breath to begin again.',
@@ -217,7 +217,7 @@ export const MEDITATIONS: Meditation[] = [
     duration: '3 min',
     durationSeconds: 180,
     description:
-      'For the in-between moments of waiting — a line, a queue, a pause.',
+      'For the in-between moments of waiting: a line, a queue, a pause.',
     moment: 'While waiting',
   },
 
@@ -298,7 +298,7 @@ export const MEDITATIONS: Meditation[] = [
     duration: '6 min',
     durationSeconds: 360,
     description:
-      'Quiet standing meditation — rooted, soft, awake.',
+      'Quiet standing meditation. Rooted, soft, awake.',
     moment: 'When you have a few minutes to stand',
   },
   {
@@ -308,7 +308,7 @@ export const MEDITATIONS: Meditation[] = [
     duration: '7 min',
     durationSeconds: 420,
     description:
-      'A short reset inspired by classical tendon-changing principles — breath, posture, intention.',
+      'A short reset inspired by classical tendon-changing principles: breath, posture, intention.',
     moment: 'Mid-day, when the body feels stiff',
   },
 
@@ -351,7 +351,7 @@ export const MEDITATIONS: Meditation[] = [
     duration: '3 min',
     durationSeconds: 180,
     description:
-      'A short, honest gratitude practice — without performance.',
+      'A short, honest gratitude practice, without performance.',
     moment: 'Before sleep',
     reflection: 'Name one small thing that held you today.',
   },

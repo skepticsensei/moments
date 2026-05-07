@@ -166,7 +166,7 @@ export function InstallPrompt() {
             Add Moments to your home screen
           </p>
           <p className="mt-0.5 text-[12px] text-charcoal-700/65 leading-snug">
-            Open it like an app — full screen, no browser.
+            Open it like an app. Full screen, no browser.
           </p>
         </div>
         <button

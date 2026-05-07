@@ -21,7 +21,7 @@ export function SavedScreen({
     <div className="screen-padding anim-fade">
       <h2 className="font-serif text-2xl text-forest-700">Saved Moments</h2>
       <p className="mt-1 text-[13px] text-charcoal-700/65">
-        Your collection — return to them when you need to.
+        Your collection. Return to them when you need to.
       </p>
 
       {meditations.length === 0 ? (

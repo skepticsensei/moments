@@ -8,7 +8,7 @@ export interface MusicTrack {
   attribution?: string
   /**
    * Per-track loudness multiplier to balance the library. Default 1.
-   * Final playback volume = base music volume (~0.25) × gain, clamped 0..1.
+   * Final playback volume = base music volume (~0.0625) × gain, clamped 0..1.
    * Lower a loud track with e.g. `gain: 0.6`. Raise a quiet one with `gain: 1.4`.
    */
   gain?: number

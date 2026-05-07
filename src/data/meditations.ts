@@ -199,6 +199,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'Anywhere, anytime',
     transcript:
       'One breath to arrive. One breath to soften. One breath to begin again.',
+    audioSrc: '/audio/three-breaths-to-center.mp3',
   },
   {
     id: 'grounding-through-posture',

@@ -31,7 +31,7 @@ export const CATEGORIES: Category[] = [
   {
     id: 'begin',
     name: 'Begin',
-    description: 'For the space between waking and stepping into the day.',
+    description: 'For the space between waking and the day.',
     longDescription:
       'Meditations for the first quiet edges of the morning — before the day takes you with it.',
     accent: '#7A8B6F',
@@ -63,7 +63,7 @@ export const CATEGORIES: Category[] = [
   {
     id: 'practice',
     name: 'Practice',
-    description: 'For meditation connected to movement and physical awareness.',
+    description: 'For meditation rooted in movement and the body.',
     longDescription:
       'Standing stillness, breath before training, awareness through the body.',
     accent: '#2F4738',

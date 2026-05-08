@@ -191,6 +191,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'Whenever you feel scattered',
     transcript:
       'Bring your attention to the soles of your feet. Feel the floor meeting you. Notice weight, contact, warmth. You do not need to go anywhere. You are already here.',
+    audioSrc: '/audio/feel-your-feet.mp3',
   },
   {
     id: 'three-breaths-to-center',
@@ -214,6 +215,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Find your seat, your spine, and your breath.',
     moment: 'When you need to come back to yourself',
+    audioSrc: '/audio/grounding-through-posture.mp3',
   },
   {
     id: 'waiting-without-worrying',
@@ -224,6 +226,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'For the in-between moments of waiting: a line, a queue, a pause.',
     moment: 'While waiting',
+    audioSrc: '/audio/waiting-without-worrying.mp3',
   },
 
   // ---------- Transition ----------

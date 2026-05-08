@@ -287,6 +287,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'Before practice begins',
     transcript:
       'Stand tall without becoming rigid. Let your breath settle into your center. Step onto the mat with respect, attention, and a willingness to learn.',
+    audioSrc: '/audio/before-stepping-onto-the-mat.mp3',
   },
   {
     id: 'after-training',
@@ -298,6 +299,7 @@ export const MEDITATIONS: Meditation[] = [
       'Slow down the body and let the breath catch up.',
     moment: 'After a workout or training session',
     reflection: 'What did the body teach you today?',
+    audioSrc: '/audio/after-training.mp3',
   },
   {
     id: 'standing-stillness',
@@ -308,6 +310,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Quiet standing meditation. Rooted, soft, awake.',
     moment: 'When you have a few minutes to stand',
+    audioSrc: '/audio/standing-stillness.mp3',
   },
   {
     id: 'yi-jin-jing-inspired-reset',
@@ -318,6 +321,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A short reset inspired by classical tendon-changing principles: breath, posture, intention.',
     moment: 'Mid-day, when the body feels stiff',
+    audioSrc: '/audio/yi-jin-jing-inspired-reset.mp3',
   },
 
   // ---------- Rest ----------

@@ -144,6 +144,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'In the gap between two meetings',
     transcript:
       'Close the last conversation gently. Stand if you can. One breath in, one long breath out. Soften the face. The next meeting has not started yet. You are here.',
+    audioSrc: '/audio/between-meetings.mp3',
   },
   {
     id: 'after-a-difficult-moment',
@@ -155,6 +156,7 @@ export const MEDITATIONS: Meditation[] = [
       'When something hard has just happened and you need to settle.',
     moment: 'Right after something difficult',
     reflection: 'What part of you needs care right now?',
+    audioSrc: '/audio/after-a-difficult-moment.mp3',
   },
   {
     id: 'before-responding',
@@ -167,6 +169,7 @@ export const MEDITATIONS: Meditation[] = [
     moment: 'Before sending the message or speaking',
     transcript:
       'Pause before you answer. Feel your feet. Let the first breath soften the body. Let the second breath create space. Let the third breath remind you that you can respond without being pulled away from yourself.',
+    audioSrc: '/audio/before-responding.mp3',
   },
   {
     id: 'when-you-feel-overwhelmed',
@@ -177,6 +180,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A gentle return when everything feels like too much.',
     moment: 'When the day has become too full',
+    audioSrc: '/audio/when-you-feel-overwhelmed.mp3',
   },
 
   // ---------- Return ----------

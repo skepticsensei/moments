@@ -57,7 +57,6 @@ export function MeditationPlayer({
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(meditation.durationSeconds)
-  const [transcriptOpen, setTranscriptOpen] = useState(false)
   const [reflectionVisible, setReflectionVisible] = useState(false)
   const [hasMarkedPlay, setHasMarkedPlay] = useState(false)
   const [musicTrack, setMusicTrack] = useState<MusicTrack | null>(() =>
@@ -70,7 +69,6 @@ export function MeditationPlayer({
     setCurrentTime(0)
     setDuration(meditation.durationSeconds)
     setAudioAvailable(null)
-    setTranscriptOpen(false)
     setReflectionVisible(false)
     setHasMarkedPlay(false)
     setMusicTrack(pickRandomTrack())
@@ -476,27 +474,6 @@ export function MeditationPlayer({
           </div>
 
         </div>
-
-        {/* Transcript */}
-        {meditation.transcript && (
-          <div className="mt-10 surface p-5">
-            <button
-              onClick={() => setTranscriptOpen((v) => !v)}
-              className="w-full flex items-center justify-between gap-2 text-sm font-medium text-forest-700"
-              aria-expanded={transcriptOpen}
-            >
-              <span>Guide text</span>
-              <ChevronDownIcon
-                className={`h-4 w-4 transition-transform ${transcriptOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
-            {transcriptOpen && (
-              <p className="mt-4 text-charcoal-700/85 leading-relaxed font-serif text-[16px] anim-fade">
-                {meditation.transcript}
-              </p>
-            )}
-          </div>
-        )}
 
         {/* Reflection */}
         {reflectionVisible && meditation.reflection && (

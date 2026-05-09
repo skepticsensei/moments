@@ -12,8 +12,7 @@ import {
 const MUSIC_VOLUME = 0.0625
 const FADE_IN_S = 3
 const FADE_OUT_S = 5
-// exponentialRampToValueAtTime can't ramp to/from 0; use a near-silent floor.
-const SILENCE = 0.0001
+const FADE_STEP_MS = 50
 
 function targetMusicVolume(track: MusicTrack | null): number {
   const gain = track?.gain ?? 1
@@ -46,11 +45,7 @@ export function MeditationPlayer({
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const musicRef = useRef<HTMLAudioElement | null>(null)
   const fallbackTimerRef = useRef<number | null>(null)
-  const audioCtxRef = useRef<AudioContext | null>(null)
-  const musicSourceRef = useRef<MediaElementAudioSourceNode | null>(null)
-  const musicGainRef = useRef<GainNode | null>(null)
-  const musicGraphElRef = useRef<HTMLAudioElement | null>(null)
-  const fadeEndTimerRef = useRef<number | null>(null)
+  const fadeIntervalRef = useRef<number | null>(null)
   const hasStartedMusicRef = useRef(false)
 
   const [audioAvailable, setAudioAvailable] = useState<boolean | null>(null)
@@ -88,108 +83,38 @@ export function MeditationPlayer({
         window.clearInterval(fallbackTimerRef.current)
       }
       cancelFade()
-      const ctx = audioCtxRef.current
-      if (ctx && ctx.state !== 'closed') ctx.close().catch(() => {})
-      audioCtxRef.current = null
-      musicSourceRef.current = null
-      musicGainRef.current = null
-      musicGraphElRef.current = null
     }
   }, [])
 
   function cancelFade() {
-    if (fadeEndTimerRef.current !== null) {
-      window.clearTimeout(fadeEndTimerRef.current)
-      fadeEndTimerRef.current = null
-    }
-    const gain = musicGainRef.current
-    const ctx = audioCtxRef.current
-    if (gain && ctx) {
-      const now = ctx.currentTime
-      const current = gain.gain.value
-      gain.gain.cancelScheduledValues(now)
-      // Lock current value so a fresh ramp starts from where we are.
-      gain.gain.setValueAtTime(Math.max(current, SILENCE), now)
+    if (fadeIntervalRef.current !== null) {
+      window.clearInterval(fadeIntervalRef.current)
+      fadeIntervalRef.current = null
     }
   }
 
-  // Lazily build the Web Audio graph for the music element so we can do
-  // sample-accurate, perceptually-smooth fades via GainNode automation.
-  function ensureMusicGraph(): GainNode | null {
-    const audio = musicRef.current
-    if (!audio) return null
-
-    // Audio element changed (new meditation / new track) — rebuild graph.
-    if (musicGraphElRef.current && musicGraphElRef.current !== audio) {
-      try {
-        musicSourceRef.current?.disconnect()
-        musicGainRef.current?.disconnect()
-      } catch {}
-      musicSourceRef.current = null
-      musicGainRef.current = null
-      musicGraphElRef.current = null
-    }
-
-    if (musicGainRef.current) return musicGainRef.current
-
-    let ctx = audioCtxRef.current
-    if (!ctx) {
-      const Ctor =
-        window.AudioContext ||
-        (window as unknown as { webkitAudioContext?: typeof AudioContext })
-          .webkitAudioContext
-      if (!Ctor) return null
-      ctx = new Ctor()
-      audioCtxRef.current = ctx
-    }
-    if (ctx.state === 'suspended') ctx.resume().catch(() => {})
-
-    try {
-      const source = ctx.createMediaElementSource(audio)
-      const gain = ctx.createGain()
-      gain.gain.value = SILENCE
-      source.connect(gain)
-      gain.connect(ctx.destination)
-      musicSourceRef.current = source
-      musicGainRef.current = gain
-      musicGraphElRef.current = audio
-      return gain
-    } catch {
-      return null
-    }
-  }
-
-  // Schedule a smooth ramp on the music GainNode. exponentialRampToValueAtTime
-  // produces a curve that matches how the ear perceives loudness — a true
-  // gradual fade rather than a linear amplitude sweep.
+  // Element-volume fade. Avoids Web Audio so iOS can keep music playing
+  // through screen lock (AudioContext gets suspended on lock and won't
+  // resume from a tap on the lock screen).
   function fadeMusicTo(target: number, onDone?: () => void) {
-    const gain = musicGainRef.current
-    const ctx = audioCtxRef.current
-    if (!gain || !ctx) {
+    const m = musicRef.current
+    if (!m) {
       onDone?.()
       return
     }
     cancelFade()
-    const now = ctx.currentTime
-    const current = Math.max(gain.gain.value, SILENCE)
-    const isFadeIn = target > current
-    const duration = isFadeIn ? FADE_IN_S : FADE_OUT_S
-    gain.gain.setValueAtTime(current, now)
-    if (target <= 0) {
-      gain.gain.exponentialRampToValueAtTime(SILENCE, now + duration)
-      gain.gain.setValueAtTime(0, now + duration)
-    } else {
-      gain.gain.exponentialRampToValueAtTime(
-        Math.max(target, SILENCE),
-        now + duration
-      )
-    }
-    if (onDone) {
-      fadeEndTimerRef.current = window.setTimeout(() => {
-        fadeEndTimerRef.current = null
-        onDone()
-      }, duration * 1000)
-    }
+    const start = m.volume
+    const isFadeIn = target > start
+    const durationMs = (isFadeIn ? FADE_IN_S : FADE_OUT_S) * 1000
+    const startTime = performance.now()
+    fadeIntervalRef.current = window.setInterval(() => {
+      const t = Math.min(1, (performance.now() - startTime) / durationMs)
+      m.volume = Math.max(0, Math.min(1, start + (target - start) * t))
+      if (t >= 1) {
+        cancelFade()
+        onDone?.()
+      }
+    }, FADE_STEP_MS)
   }
 
   const stopFallbackTimer = () => {
@@ -202,35 +127,15 @@ export function MeditationPlayer({
   const playMusic = () => {
     const m = musicRef.current
     if (!m || musicAvailable === false) return
-    const gain = ensureMusicGraph()
-    if (!gain) {
-      // Web Audio unavailable — fall back to element-level volume so we still
-      // get *something* even if it's not as smooth.
-      m.volume = hasStartedMusicRef.current ? m.volume : 0
-      hasStartedMusicRef.current = true
-      m.play().catch(() => setMusicAvailable(false))
-      return
-    }
-    const ctx = audioCtxRef.current
-    if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {})
-
     const target = targetMusicVolume(musicTrack)
-    // First time the music starts in this session: snap gain to silence so the
-    // fade-in is audible from the very beginning. On resume, leave the current
-    // gain alone so pause/resume doesn't restart the fade.
     if (!hasStartedMusicRef.current) {
       cancelFade()
-      const now = ctx?.currentTime ?? 0
-      gain.gain.cancelScheduledValues(now)
-      gain.gain.setValueAtTime(SILENCE, now)
+      m.volume = 0
       hasStartedMusicRef.current = true
     }
-    // Make sure the underlying element is at full element-volume; the fade is
-    // happening on the GainNode, not on m.volume.
-    m.volume = 1
     m.play()
       .then(() => {
-        if (gain.gain.value < target - 0.001) fadeMusicTo(target)
+        if (m.volume < target - 0.001) fadeMusicTo(target)
       })
       .catch(() => setMusicAvailable(false))
   }
@@ -298,6 +203,57 @@ export function MeditationPlayer({
     }
   }
 
+  // Latest-handler refs so MediaSession action callbacks (registered once)
+  // always invoke the current closure, not a stale one.
+  const handlePlayPauseRef = useRef(handlePlayPause)
+  const isPlayingRef = useRef(isPlaying)
+  useEffect(() => {
+    handlePlayPauseRef.current = handlePlayPause
+    isPlayingRef.current = isPlaying
+  })
+
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: meditation.title,
+      artist: 'Moments Meditation',
+      album: category.name,
+    })
+  }, [meditation.id, meditation.title, category.name])
+
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return
+    navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused'
+  }, [isPlaying])
+
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return
+    const ms = navigator.mediaSession
+    ms.setActionHandler('play', () => {
+      if (!isPlayingRef.current) handlePlayPauseRef.current()
+    })
+    ms.setActionHandler('pause', () => {
+      if (isPlayingRef.current) handlePlayPauseRef.current()
+    })
+    return () => {
+      ms.setActionHandler('play', null)
+      ms.setActionHandler('pause', null)
+      ms.metadata = null
+      ms.playbackState = 'none'
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!('mediaSession' in navigator)) return
+    if (typeof navigator.mediaSession.setPositionState !== 'function') return
+    try {
+      navigator.mediaSession.setPositionState({
+        duration,
+        position: Math.min(currentTime, duration),
+        playbackRate: 1,
+      })
+    } catch {}
+  }, [currentTime, duration])
 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = Number(e.target.value)

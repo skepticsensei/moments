@@ -246,6 +246,7 @@ export const MEDITATIONS: Meditation[] = [
     transcript:
       'You are between roles now. Let work remain where it belongs. Feel your hands, your shoulders, your breath. Before you enter the next space, return to yourself.',
     reflection: 'What can you leave behind before you walk in?',
+    audioSrc: '/audio/after-work-before-home.mp3',
   },
   {
     id: 'before-a-conversation',
@@ -256,6 +257,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Arrive present before someone arrives in front of you.',
     moment: 'Before a conversation that matters',
+    audioSrc: '/audio/before-a-conversation.mp3',
   },
   {
     id: 'leaving-one-thing-behind',
@@ -267,6 +269,7 @@ export const MEDITATIONS: Meditation[] = [
       'Set down something you have been carrying so the next moment can be clear.',
     moment: 'Between one task and the next',
     reflection: 'What are you ready to set down?',
+    audioSrc: '/audio/leaving-one-thing-behind.mp3',
   },
   {
     id: 'crossing-the-threshold',
@@ -277,6 +280,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'A small ritual for moving from one space into another.',
     moment: 'At a doorway, real or symbolic',
+    audioSrc: '/audio/crossing-the-threshold.mp3',
   },
 
   // ---------- Practice ----------

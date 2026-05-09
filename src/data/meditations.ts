@@ -343,6 +343,7 @@ export const MEDITATIONS: Meditation[] = [
       'A soft release of everything the day asked of you.',
     moment: 'In the evening',
     reflection: 'What was today, in one quiet sentence?',
+    audioSrc: '/audio/letting-the-day-go.mp3',
   },
   {
     id: 'before-sleep',
@@ -353,6 +354,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Slow breath and body softening to ease into sleep.',
     moment: 'In bed, before closing your eyes',
+    audioSrc: '/audio/before-sleep.mp3',
   },
   {
     id: 'releasing-the-shoulders',
@@ -363,6 +365,7 @@ export const MEDITATIONS: Meditation[] = [
     description:
       'Let go of the day held in the upper back, neck, and jaw.',
     moment: 'After a long day',
+    audioSrc: '/audio/releasing-the-shoulders.mp3',
   },
   {
     id: 'gratitude-before-rest',
@@ -374,6 +377,7 @@ export const MEDITATIONS: Meditation[] = [
       'A short, honest gratitude practice, without performance.',
     moment: 'Before sleep',
     reflection: 'Name one small thing that held you today.',
+    audioSrc: '/audio/gratitude-before-rest.mp3',
   },
 ]
 

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { Meditation } from '../data/meditations'
 import { getCategory } from '../data/meditations'
 import { pickRandomTrack, type MusicTrack } from '../data/music'
+import { trackComplete } from '../lib/analytics'
 import {
   ChevronDownIcon,
   HeartIcon,
@@ -144,6 +145,7 @@ export function MeditationPlayer({
     setIsPlaying(false)
     setReflectionVisible(true)
     stopFallbackTimer()
+    trackComplete(meditation.id, meditation.category)
     fadeMusicTo(0, () => {
       const m = musicRef.current
       if (m) {

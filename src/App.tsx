@@ -9,6 +9,7 @@ import { HomeScreen } from './components/screens/HomeScreen'
 import { MomentSelectScreen } from './components/screens/MomentSelectScreen'
 import { RecentScreen } from './components/screens/RecentScreen'
 import { SavedScreen } from './components/screens/SavedScreen'
+import { StatsScreen } from './components/screens/StatsScreen'
 import {
   getCategory,
   getMeditation,
@@ -18,12 +19,23 @@ import {
 } from './data/meditations'
 import { useFavorites } from './hooks/useFavorites'
 import { useRecentlyPlayed } from './hooks/useRecentlyPlayed'
+import { trackCategory, trackPlay } from './lib/analytics'
 
 type PushedScreen =
   | { kind: 'category'; id: CategoryId }
   | { kind: 'moments' }
 
 export default function App() {
+  const [isStatsRoute, setIsStatsRoute] = useState(
+    () => typeof window !== 'undefined' && window.location.hash === '#/stats'
+  )
+
+  useEffect(() => {
+    const onHash = () => setIsStatsRoute(window.location.hash === '#/stats')
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
   const [tab, setTab] = useState<TabId>('home')
   const [pushed, setPushed] = useState<PushedScreen[]>([])
   const [openMeditationId, setOpenMeditationId] = useState<string | null>(null)
@@ -53,8 +65,10 @@ export default function App() {
     setScreenKey((k) => k + 1)
   }
 
-  const pushCategory = (id: CategoryId) =>
+  const pushCategory = (id: CategoryId) => {
+    trackCategory(id)
     setPushed((s) => [...s, { kind: 'category', id }])
+  }
   const pushMoments = () => setPushed((s) => [...s, { kind: 'moments' }])
   const popPushed = () => setPushed((s) => s.slice(0, -1))
   const openMeditation = (id: string) => setOpenMeditationId(id)
@@ -79,6 +93,10 @@ export default function App() {
   const pushedKey = pushed
     .map((p) => (p.kind === 'category' ? `c:${p.id}` : 'm'))
     .join('>')
+
+  if (isStatsRoute) {
+    return <StatsScreen />
+  }
 
   return (
     <div className="phone-frame">
@@ -157,7 +175,10 @@ export default function App() {
           isFavorite={isFavorite(openMed.id)}
           onToggleFavorite={() => toggleFavorite(openMed.id)}
           onClose={closeMeditation}
-          onPlay={() => markPlayed(openMed.id)}
+          onPlay={() => {
+            markPlayed(openMed.id)
+            trackPlay(openMed.id, openMed.category)
+          }}
         />
       )}
     </div>

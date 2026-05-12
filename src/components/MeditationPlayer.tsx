@@ -10,7 +10,11 @@ import {
   PlayIcon,
 } from './icons'
 
-const MUSIC_VOLUME = 0.02
+// Source files are pre-normalized: voice baked to ~-16 LUFS, music baked to
+// ~-34 LUFS. iOS Safari ignores HTMLMediaElement.volume in many states, so
+// the only reliable mixing happens at the file level. Keep this at 1 unless
+// you need a global trim.
+const MUSIC_VOLUME = 1
 const FADE_IN_S = 3
 const FADE_OUT_S = 5
 const FADE_STEP_MS = 50

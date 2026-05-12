@@ -7,9 +7,9 @@ export interface MusicTrack {
   mood?: MusicMood
   attribution?: string
   /**
-   * Per-track loudness multiplier to balance the library. Default 1.
-   * Final playback volume = MUSIC_VOLUME × gain, clamped 0..1.
-   * Gains target ~-32 LUFS so any random track sits at the same bed level.
+   * Optional per-track trim. Default 1. Source files are already normalized
+   * to ~-34 LUFS via ffmpeg loudnorm, so this should rarely be needed —
+   * set only if a replacement track lands outside that range.
    */
   gain?: number
 }
@@ -21,58 +21,51 @@ export interface MusicTrack {
  * a meditation opens, starts at a random offset within the track, and
  * fades in/out so the music matches the meditation's length.
  */
-// Gains normalize each track to ~-32 LUFS so no single random pick is
-// noticeably louder than the others. Measured with ffmpeg loudnorm against
-// the source files; recompute if you replace a track.
+// Source files are pre-normalized to ~-34 LUFS via ffmpeg loudnorm, so no
+// per-track gain is needed. Voice files are baked to ~-16 LUFS, giving a
+// ~18 dB voice-over-music separation that survives iOS's volume quirks.
 export const MUSIC_LIBRARY: MusicTrack[] = [
   {
     id: 'drift-one',
     title: 'Drift One',
     src: '/audio/music/drift-one.m4a',
     mood: 'ambient',
-    gain: 0.28,
   },
   {
     id: 'drift-two',
     title: 'Drift Two',
     src: '/audio/music/drift-two.m4a',
     mood: 'ambient',
-    gain: 0.42,
   },
   {
     id: 'drift-four',
     title: 'Drift Four',
     src: '/audio/music/drift-four.m4a',
     mood: 'ambient',
-    gain: 0.12,
   },
   {
     id: 'drift-five',
     title: 'Drift Five',
     src: '/audio/music/drift-five.m4a',
     mood: 'ambient',
-    gain: 0.09,
   },
   {
     id: 'drift-nine',
     title: 'Drift Nine',
     src: '/audio/music/drift-nine.m4a',
     mood: 'ambient',
-    gain: 0.21,
   },
   {
     id: 'drift-ten',
     title: 'Drift Ten',
     src: '/audio/music/drift-ten.m4a',
     mood: 'ambient',
-    gain: 0.15,
   },
   {
     id: 'babbling-brook',
     title: 'Babbling Brook',
     src: '/audio/music/babbling-brook.m4a',
     mood: 'natural',
-    gain: 0.64,
   },
   {
     id: 'birds-and-brook',
@@ -85,7 +78,6 @@ export const MUSIC_LIBRARY: MusicTrack[] = [
     title: 'Birds Chirping',
     src: '/audio/music/birds-chirping.m4a',
     mood: 'natural',
-    gain: 0.53,
   },
   {
     id: 'waves',

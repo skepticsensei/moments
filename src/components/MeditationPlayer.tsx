@@ -10,7 +10,7 @@ import {
   PlayIcon,
 } from './icons'
 
-const MUSIC_VOLUME = 0.025
+const MUSIC_VOLUME = 0.005
 const FADE_IN_S = 3
 const FADE_OUT_S = 5
 const FADE_STEP_MS = 50
